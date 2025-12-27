@@ -18,10 +18,30 @@ public class CandidateController {
         return repo.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Candidate getById(@PathVariable String id) {
+        return repo.findById(id).orElse(null);
+    }
+
     @PostMapping
     public Candidate createCandidate(@RequestBody Candidate candidate) {
         return repo.save(candidate);
     }
+
+    @PutMapping("/{id}")
+    public Candidate updateCandidate(@PathVariable String id, @RequestBody Candidate updatedCandidate) {
+        return repo.findById(id)
+                .map(existing -> {
+                    existing.setName(updatedCandidate.getName());
+                    existing.setEmail(updatedCandidate.getEmail());
+                    existing.setSkills(updatedCandidate.getSkills());
+                    return repo.save(existing);
+                })
+                .orElse(null);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteCandidate(@PathVariable String id) {
+        repo.deleteById(id);
+    }
 }
-
-

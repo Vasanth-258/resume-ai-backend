@@ -2,15 +2,21 @@ package com.resumeai.resume_backend;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.validation.constraints.NotBlank;
 
 @Document(collection = "candidates")
 public class Candidate {
 
     @Id
     private String id;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String email;
-    private int experience;
+
+    private String skills;
 
     public Candidate() {
     }
@@ -39,11 +45,11 @@ public class Candidate {
         this.email = email;
     }
 
-    public int getExperience() {
-        return experience;
+    public String getSkills() {
+        return skills;
     }
 
-    public void setExperience(int experience) {
-        this.experience = experience;
+    public void setSkills(String skills) {
+        this.skills = skills;
     }
 }
