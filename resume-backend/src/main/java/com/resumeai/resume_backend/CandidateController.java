@@ -5,6 +5,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/candidates")
+@CrossOrigin(origins = "http://localhost:3000")   // ⭐ allow React frontend
 public class CandidateController {
 
     private final CandidateRepository repo;
